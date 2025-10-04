@@ -657,35 +657,6 @@ const AsteroidWebsite = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <div className="stars"></div>
       </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-12">
-          <Radio className="w-20 h-20 text-orange-500 mx-auto mb-6" />
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Asteroid Tracking System
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Real-time monitoring and tracking of near-Earth objects using NASA NEO API
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-r from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl p-12 border border-orange-500/30 min-h-[400px] flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-32 h-32 mx-auto mb-8 relative">
-              <div className="absolute inset-0 bg-orange-500/20 rounded-full animate-ping"></div>
-              <div className="relative w-32 h-32 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
-                <Radio className="w-16 h-16 text-white" />
-              </div>
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Tracking Module Coming Soon
-            </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              This section will integrate NASA Near-Earth Object API to provide real-time asteroid tracking, orbital visualization, and impact probability calculations.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 
@@ -693,35 +664,6 @@ const AsteroidWebsite = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-red-900 to-black pt-24 pb-16 px-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <div className="stars"></div>
-      </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-12">
-          <Crosshair className="w-20 h-20 text-orange-500 mx-auto mb-6" />
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Impact Simulator
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Interactive simulation of asteroid impacts with geological and environmental consequence modeling
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-r from-gray-800/60 to-gray-900/60 backdrop-blur-lg rounded-2xl p-12 border border-red-500/30 min-h-[400px] flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-32 h-32 mx-auto mb-8 relative">
-              <div className="absolute inset-0 bg-red-500/20 rounded-full animate-pulse"></div>
-              <div className="relative w-32 h-32 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center">
-                <Crosshair className="w-16 h-16 text-white" />
-              </div>
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Simulator Module Coming Soon
-            </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              This section will feature an interactive impact simulator integrating USGS geological data for comprehensive impact analysis including crater formation, seismic effects, and environmental consequences.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );
