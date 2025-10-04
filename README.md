@@ -9,11 +9,13 @@ Structure:
 Getting started (Windows PowerShell):
 
 1. Start the server
+   ```bash
    cd ".\server"
    npm install
-   npm run dev
+   npm run dev**
 
 2. Start the client
+   ```bash
    cd ".\client"
    npm install
    npm run dev
