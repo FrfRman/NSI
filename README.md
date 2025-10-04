@@ -1,4 +1,4 @@
-# CosmicEye — Starter Scaffold
+# CosmicEye — NSI Project
 
 This repository contains a minimal starter for CosmicEye: a React + Three.js frontend and a Node.js Express backend that fetches TLE data from CelesTrak.
 
