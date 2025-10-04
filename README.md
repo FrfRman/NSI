@@ -9,12 +9,12 @@ Structure:
 Getting started (Windows PowerShell):
 
 1. Start the server
-   cd "c:\Users\neeks\OneDrive\Desktop\project 2\nasa-sky-tracker\server"
+   cd ".\server"
    npm install
    npm run dev
 
 2. Start the client
-   cd "c:\Users\neeks\OneDrive\Desktop\project 2\nasa-sky-tracker\client"
+   cd ".\client"
    npm install
    npm run dev
 
