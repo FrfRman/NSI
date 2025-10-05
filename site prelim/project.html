@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asteroid Search Engine</title>
+<style>
+  /* General body */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at center, #0b0b0b 0%, #1a1a2e 100%);
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Floating asteroids background */
+.asteroid {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ffcc00;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: floatAsteroid linear infinite;
+}
+
+@keyframes floatAsteroid {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(300px) translateX(50px) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-300px) translateX(-50px) scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Title */
+h1 {
+  color: #ffcc00;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 8px #000;
+  margin-bottom: 30px;
+  z-index: 1;
+}
+
+/* Search input */
+input[type="text"] {
+  width: 350px;
+  max-width: 90%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+  background-color: #1b1b2f;
+  color: #f0f0f0;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+input[type="text"]:focus {
+  box-shadow: 0 0 25px rgba(255, 204, 0, 0.8);
+  transform: scale(1.02);
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+  width: 95%;
+  max-width: 900px;
+  margin-top: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInTable 0.5s forwards;
+  z-index: 1;
+}
+
+/* Table fade-in animation */
+@keyframes fadeInTable {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Table header */
+th {
+  background: linear-gradient(90deg, #222 0%, #333 100%);
+  color: #ffcc00;
+  font-weight: 600;
+  padding: 15px;
+  text-align: left;
+  font-size: 1rem;
+}
+
+/* Table cells */
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #444;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+
+/* Table rows */
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+tr:hover {
+  background-color: rgba(255, 204, 0, 0.15);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  th, td {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  input[type="text"] {
+    width: 90%;
+  }
+}
+</style>
+</head>
+<body>
+
+<h1>Asteroid Search Engine</h1>
+<input type="text" id="searchBox" placeholder="Search asteroid by name...">
+
+<table id="resultTable" style="display:none;">
+  <thead>
+    <tr>
+      <th>SPK ID</th>
+      <th>Full Name</th>
+      <th>Name</th>
+      <th>NEO</th>
+      <th>PHA</th>
+      <th>Diameter (km)</th>
+      <th>Period (year)</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+  let asteroids = [];
+
+  // Load JSON data
+  fetch('asteroids.json')
+    .then(response => response.json())
+    .then(data => { asteroids = data; });
+
+  const searchBox = document.getElementById('searchBox');
+  const table = document.getElementById('resultTable');
+  const tbody = document.getElementById('tableBody');
+
+  searchBox.addEventListener('input', () => {
+    const query = searchBox.value.toLowerCase();
+    tbody.innerHTML = '';
+
+    if(query === '') {
+      table.style.display = 'none';
+      return;
+    }
+
+    const results = asteroids.filter(a => 
+      a.full_name.toLowerCase().includes(query) || 
+      (a.name && a.name.toLowerCase().includes(query))
+    );
+
+    if(results.length === 0) {
+      table.style.display = 'none';
+      return;
+    }
+
+    results.forEach(a => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${a.spkid}</td>
+        <td>${a.full_name}</td>
+        <td>${a.name || '-'}</td>
+        <td>${a.neo ? 'Yes' : 'No'}</td>
+        <td>${a.pha ? 'Yes' : 'No'}</td>
+        <td>${a.diameter}</td>
+        <td>${a.period_year}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    table.style.display = 'table';
+  });
+</script>
+
+<script>
+  const numAsteroids = 50;
+
+  for(let i=0; i<numAsteroids; i++){
+    const asteroid = document.createElement('div');
+    asteroid.classList.add('asteroid');
+    asteroid.style.top = `${Math.random() * window.innerHeight}px`;
+    asteroid.style.left = `${Math.random() * window.innerWidth}px`;
+    asteroid.style.width = `${4 + Math.random() * 8}px`;
+    asteroid.style.height = asteroid.style.width;
+    asteroid.style.animationDuration = `${5 + Math.random() * 10}s`;
+    document.body.appendChild(asteroid);
+  }
+</script>
+
+</body>
+</html>
