@@ -1,0 +1,3 @@
+download both files on the same folder
+go to cmd on the folder it is stored in and type:  python -m http.server 8000
+go to:  http://localhost:8000/project.html
