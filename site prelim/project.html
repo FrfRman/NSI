@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asteroid Search Engine</title>
 <style>
-  /* General body */
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: radial-gradient(circle at center, #0b0b0b 0%, #1a1a2e 100%);
@@ -17,9 +17,9 @@ body {
   min-height: 100vh;
   overflow: hidden;
   position: relative;
+  overflow-y: scroll;
 }
 
-/* Floating asteroids background */
 .asteroid {
   position: absolute;
   width: 8px;
@@ -29,6 +29,8 @@ body {
   opacity: 0.7;
   animation: floatAsteroid linear infinite;
 }
+
+
 
 @keyframes floatAsteroid {
   0% {
@@ -45,7 +47,6 @@ body {
   }
 }
 
-/* Title */
 h1 {
   color: #ffcc00;
   font-size: 2.5rem;
@@ -54,7 +55,6 @@ h1 {
   z-index: 1;
 }
 
-/* Search input */
 input[type="text"] {
   width: 350px;
   max-width: 90%;
@@ -75,7 +75,6 @@ input[type="text"]:focus {
   transform: scale(1.02);
 }
 
-/* Table styling */
 table {
   border-collapse: collapse;
   width: 95%;
@@ -90,7 +89,6 @@ table {
   z-index: 1;
 }
 
-/* Table fade-in animation */
 @keyframes fadeInTable {
   to {
     opacity: 1;
@@ -98,7 +96,6 @@ table {
   }
 }
 
-/* Table header */
 th {
   background: linear-gradient(90deg, #222 0%, #333 100%);
   color: #ffcc00;
@@ -108,7 +105,6 @@ th {
   font-size: 1rem;
 }
 
-/* Table cells */
 td {
   padding: 12px 15px;
   border-bottom: 1px solid #444;
@@ -116,7 +112,6 @@ td {
   color: #e0e0e0;
 }
 
-/* Table rows */
 tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.03);
 }
@@ -127,7 +122,25 @@ tr:hover {
   transition: background 0.3s ease;
 }
 
-/* Responsive table */
+
+
+
+.results {
+  max-height: 200px;   
+  overflow-y: auto;    
+}
+
+.results::-webkit-scrollbar {
+  width: 8px;
+}
+.results::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+.results::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+  
 @media (max-width: 768px) {
   th, td {
     font-size: 0.85rem;
@@ -163,7 +176,6 @@ tr:hover {
 <script>
   let asteroids = [];
 
-  // Load JSON data
   fetch('asteroids.json')
     .then(response => response.json())
     .then(data => { asteroids = data; });
@@ -200,7 +212,7 @@ tr:hover {
         <td>${a.neo ? 'Yes' : 'No'}</td>
         <td>${a.pha ? 'Yes' : 'No'}</td>
         <td>${a.diameter}</td>
-        <td>${a.period_year}</td>
+        <td>${a.per_y}</td>
       `;
       tbody.appendChild(row);
     });
